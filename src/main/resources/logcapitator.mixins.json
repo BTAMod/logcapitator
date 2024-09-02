@@ -1,0 +1,17 @@
+{
+    "required": true,
+    "minVersion": "0.8",
+    "package": "bigjango.logcapitator.mixins",
+    "compatibilityLevel": "JAVA_8",
+    "mixins": [
+        "TreecapitatorHelperMixin",
+        "ChunkGeneratorMixin",
+        "WorldMixin",
+        "ItemDyeMixin"
+    ],
+    "client": [
+    ],
+    "injectors": {
+        "defaultRequire": 1
+  }
+}
