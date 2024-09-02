@@ -1,5 +1,7 @@
 package bigjango.logcapitator.mixins;
 
+import bigjango.logcapitator.Logcapitator;
+
 import net.minecraft.core.data.gamerule.TreecapitatorHelper;
 import net.minecraft.core.block.Block;
 import net.minecraft.core.world.World;
@@ -22,7 +24,11 @@ public class TreecapitatorHelperMixin {
         if (b instanceof BlockLog) {
             int meta = world.getBlockMetadata(x, y, z);
             meta >>= 2;
-            return (meta == 0 ? 0 : id);
+            if (Logcapitator.reverse == false) {
+                return (meta == 0 ? 0 : id);
+            } else {
+                return (meta == 0 ? id : 0);
+            }
         }
         return id;
     }

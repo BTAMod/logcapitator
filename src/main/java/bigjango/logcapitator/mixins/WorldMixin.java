@@ -4,6 +4,7 @@ import bigjango.logcapitator.Logcapitator;
 
 import net.minecraft.core.world.World;
 import net.minecraft.core.block.Block;
+import net.minecraft.core.block.BlockAxisAligned;
 import net.minecraft.core.block.BlockLog;
 
 import org.spongepowered.asm.mixin.Mixin;
@@ -22,28 +23,28 @@ public class WorldMixin {
 
     @Inject(method = "setBlock", at = @At("TAIL"))
     public void setBlockWrap(int x, int y, int z, int id, CallbackInfoReturnable<Boolean> cir) {
-        if (Logcapitator.inTreeGen && isLog(id)) {
+        if (Logcapitator.inTreeGen != Logcapitator.reverse && isLog(id)) {
             ((World) (Object) this).setBlockMetadata(x, y, z, 1 << 2);
         }
     }
 
     @Inject(method = "setBlockWithNotify", at = @At("TAIL"))
     public void setBlockWNWrap(int x, int y, int z, int id, CallbackInfoReturnable<Boolean> cir) {
-        if (Logcapitator.inTreeGen && isLog(id)) {
+        if (Logcapitator.inTreeGen != Logcapitator.reverse && isLog(id)) {
             ((World) (Object) this).setBlockMetadataWithNotify(x, y, z, 1 << 2);
         }
     }
 
     @Inject(method = "setBlockAndMetadata", at = @At("TAIL"))
     public void setBlockAndMeta(int x, int y, int z, int id, int meta, CallbackInfoReturnable<Boolean> cir) {
-        if (Logcapitator.inTreeGen && isLog(id)) {
+        if (Logcapitator.inTreeGen != Logcapitator.reverse && isLog(id)) {
             ((World) (Object) this).setBlockMetadata(x, y, z, meta | 1 << 2);
         }
     }
 
     @Inject(method = "setBlockAndMetadataWithNotify", at = @At("TAIL"))
     public void setBlockAndMetaWN(int x, int y, int z, int id, int meta, CallbackInfoReturnable<Boolean> cir) {
-        if (Logcapitator.inTreeGen && isLog(id)) {
+        if (Logcapitator.inTreeGen != Logcapitator.reverse && isLog(id)) {
             ((World) (Object) this).setBlockMetadataWithNotify(x, y, z, meta | 1 << 2);
         }
     }
